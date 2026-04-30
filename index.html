@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>FridiTube - закрыта</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400;500;600&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --red: #e11d48;
+      --red-dark: #9f1239;
+      --bg-black: #000000;
+      --bg-dark: #0a0a0a;
+      --bg-card: #111111;
+      --bg-elevated: #1a1a1a;
+      --border: rgba(255, 255, 255, 0.08);
+      --text-white: #ffffff;
+      --text-gray: #c0c0c0;
+      --text-dim: #6b6b6b;
+    }
+
+    body {
+      background: var(--bg-black);
+      color: var(--text-white);
+      font-family: 'Barlow', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(225, 29, 72, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(225, 29, 72, 0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      width: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 48px;
+    }
+
+    .avatar-red {
+      width: 54px;
+      height: 54px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      color: #ffffff;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 2px rgba(225, 29, 72, 0.5);
+    }
+
+    .logo-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: var(--text-white);
+    }
+    .logo-text span {
+      color: var(--red);
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 48px;
+      margin-bottom: 24px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(225, 29, 72, 0.15);
+      border: 1px solid rgba(225, 29, 72, 0.5);
+      color: #ffb3c6;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 40px;
+      margin-bottom: 28px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: pulseRed 2s infinite;
+    }
+
+    @keyframes pulseRed {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+        background: #e11d48;
+      }
+      50% {
+        opacity: 0.5;
+        transform: scale(0.9);
+        background: #fda4af;
+      }
+    }
+
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(38px, 7vw, 62px);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      color: var(--text-white);
+      letter-spacing: -0.5px;
+    }
+
+    h1 .dim {
+      color: var(--text-dim);
+    }
+
+    .date {
+      font-size: 14px;
+      color: var(--text-gray);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .date::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--red);
+      border-radius: 2px;
+    }
+
+    .desc {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-gray);
+      margin-bottom: 40px;
+    }
+
+    .reasons {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+
+    .reason {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 20px;
+    }
+
+    .reason-icon {
+      font-size: 26px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .reason-title {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: var(--text-white);
+      letter-spacing: -0.2px;
+    }
+
+    .reason-text {
+      font-size: 13.5px;
+      color: #a3a3a3;
+      line-height: 1.55;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 42px;
+    }
+
+    .stat {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 16px 8px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    .farewell {
+      border-left: 4px solid var(--red);
+      padding: 18px 24px;
+      background: rgba(225, 29, 72, 0.05);
+      border-radius: 0 20px 20px 0;
+      font-size: 14.5px;
+      color: var(--text-gray);
+      line-height: 1.7;
+    }
+
+    .farewell strong {
+      color: var(--text-white);
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    .footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer a:hover {
+      color: var(--red);
+      border-bottom-color: var(--red);
+    }
+
+    @media (max-width: 540px) {
+      .card {
+        padding: 28px 20px;
+      }
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .stat-num {
+        font-size: 26px;
+      }
+      .reason {
+        padding: 14px 16px;
+        gap: 12px;
+      }
+      .avatar-red {
+        width: 44px;
+        height: 44px;
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="logo">
+    <div class="avatar-red">FT</div>
+    <div class="logo-text">Fridi<span>Tube</span></div>
+  </div>
+
+  <div class="card">
+    <div class="status-badge">
+      <div class="status-dot"></div>
+      ПРОЕКТ ЗАКРЫТ
+    </div>
+
+    <h1>Видеоплатформа<br><span class="dim">прекратила работу</span></h1>
+
+    <div class="date">28 апреля 2026 года</div>
+
+    <p class="desc">
+      FridiTube создавался как независимая видеоплатформа. В силу ряда причин проект закрыт.
+      Спасибо каждому, кто участвовал в жизни сообщества.
+    </p>
+
+    <div class="reasons">
+      <div class="reason">
+        <div class="reason-icon">🔥</div>
+        <div>
+          <div class="reason-title">Выгорание разработчика</div>
+          <div class="reason-text">Проект велся одним человеком без команды. Поддержка серверов, разработка и модерация привели к потере мотивации и ресурса.</div>
+        </div>
+      </div>
+      <div class="reason">
+        <div class="reason-icon">📉</div>
+        <div>
+          <div class="reason-title">Недостаток финансирования</div>
+          <div class="reason-text">Инфраструктура видеохостинга требует постоянных затрат. Монетизация не покрывала расходы, что сделало дальнейшую работу невозможной.</div>
+        </div>
+      </div>
+      <div class="reason">
+        <div class="reason-icon">⚙️</div>
+        <div>
+          <div class="reason-title">Низкая активность</div>
+          <div class="reason-text">Аудитория не достигла уровня самоподдерживающегося сообщества. Без стабильного притока пользователей развитие невозможно.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">2025</div>
+        <div class="stat-label">Год запуска</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">~9</div>
+        <div class="stat-label">Месяцев работы</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Видео</div>
+        <div class="stat-label">Независимый хостинг</div>
+      </div>
+    </div>
+
+    <div class="farewell">
+      <strong>Финальное слово:</strong> FridiTube закрывается навсегда. Спасибо всем авторам и зрителям, кто был с проектом.
+      Возможно, в будущем платформа вернется в другом виде, но сейчас решение окончательное.
+    </div>
+  </div>
+
+  <div class="footer">
+    FridiTube - независимая видеоплатформа. Не связана с крупными сервисами.<br>
+    © 2025-2026 · Проект завершен
+  </div>
+
+</div>
+</body>
+</html>
